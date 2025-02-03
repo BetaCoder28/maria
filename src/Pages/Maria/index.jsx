@@ -1,4 +1,5 @@
 import MariaImage from "../../Components/Maria";
+import Feedback from "../../Components/Feedback";
 
 const Maria = () => {
 
@@ -25,14 +26,8 @@ const Maria = () => {
             </div>
 
             {/* Feedback space */}
+            <Feedback />
             
-            <div className="w-3/5 h-auto bg-[#003366] mt-18 ml-2 mr-12 rounded-xl">
-                <div className="p-8">
-                    <h3 className="text-xl font-bold mb-2">Feedback</h3>
-                    <hr></hr>
-
-                </div>
-            </div>
         </div>
     )
 
