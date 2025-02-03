@@ -1,4 +1,4 @@
-import { useRoutes, BrowserRouter } from 'react-router-dom';
+import { useRoutes, BrowserRouter, useLocation } from 'react-router-dom';
 import './App.css'
 
 import NavBar from '../../Components/NavBar'
@@ -21,11 +21,20 @@ const AppRoutes = () => {
   return routes
 }
 
+const AppWrapper = () => {
+  const location = useLocation();
+  
+  return <>
+    { location.pathname !== '/' &&  <NavBar />}
+    <AppRoutes />
+  </>
+
+}
+
 const App = () => {
   return (
       <BrowserRouter >
-        <NavBar />
-        <AppRoutes />
+        <AppWrapper />
       </BrowserRouter >
   )
 }
