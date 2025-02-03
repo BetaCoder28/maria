@@ -15,7 +15,7 @@ const Home = () => {
             <div className='flex flex-col items-center m-4 relative z-10'>
                 <p className='m-4 text-justify'>Maria&rsquo;s main goal is to provide you with a comprehensive and effective approach to learning and practicing a new language. She achieves this by offering a structured program that includes a variety of lessons focused on real-life conversations. These lessons are designed to simulate authentic scenarios, allowing you to develop practical language skills in a meaningful context. After each lesson, you will have the opportunity to apply what you&rsquo;ve learned by engaging in guided conversations that reinforce the key concepts and vocabulary covered. This hands-on practice ensures that you not only understand the material but also gain the confidence to use the language in real-world situations. Through this method, Maria aims to create an immersive and interactive learning experience that supports your progress and helps you achieve fluency over time.</p>
                 
-                <p className='m-4'>We also have one more service, the translater.</p>
+                <p className='m-4'>We also have one more service, the translator.</p>
                 
                 <h2 className='text-white font-bold text-2xl'>Our services </h2>
             </div>
