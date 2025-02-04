@@ -12,3 +12,28 @@ p,span{
   background-color: #333333;
   color: white;
 }
+
+/* Personalización para navegadores WebKit (Chrome, Safari, Edge) */
+html::-webkit-scrollbar {
+  width: 12px; /* Ancho de la barra vertical */
+}
+
+html::-webkit-scrollbar-track {
+  background: #2E1437; /* Color del fondo (track) */
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #F4D03F; /* Color de la barra (thumb) */
+  border-radius: 6px;
+  border: 3px solid #2E1437; /* Borde que combina con el track */
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: #F1C40F; /* Color al pasar el mouse */
+}
+
+/* Personalización para Firefox */
+html {
+  scrollbar-width: thin; /* "auto" | "thin" | "none" */
+  scrollbar-color: #F4D03F #2E1437; /* thumb track */
+}
