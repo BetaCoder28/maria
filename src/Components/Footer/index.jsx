@@ -112,12 +112,12 @@ const Footer = () => {
                     <ul className="mt-4 space-y-2">
                     <li>
                         <a href="#" className="text-base hover:text-[#F4D03F] transition-colors">
-                        Privacidad
+                        Privacy
                         </a>
                     </li>
                     <li>
                         <a href="#" className="text-base hover:text-[#F4D03F] transition-colors">
-                        Términos
+                        Terms
                         </a>
                     </li>
                     </ul>
@@ -125,7 +125,7 @@ const Footer = () => {
 
                 <div className="col-span-1">
                     <h3 className="text-sm font-semibold uppercase tracking-wider text-[#F4D03F]">
-                    Contacto
+                    Contact
                     </h3>
                     <ul className="mt-4 space-y-2">
                     <li>
@@ -139,7 +139,7 @@ const Footer = () => {
                         href="mailto:davidbaar07@gmail.com" 
                         className="hover:text-[#F4D03F] transition-colors"
                         >
-                        davidbaar07@gmail.com
+                        Email
                         </a>
                     </li>
                     </ul>
@@ -150,9 +150,9 @@ const Footer = () => {
             {/* Copyright */}
             <div className="mt-12 border-t border-[#4A235A] pt-8">
                 <p className="text-center text-sm text-gray-400">
-                &copy; {new Date().getFullYear()} HelloMaria & Proyecto Maria. Todos los derechos reservados.
+                &copy; {new Date().getFullYear()} HelloMaria & Project Maria. All rights reserved.
                 <br />
-                Diseñado y desarrollado por David Bautista Arroyo
+                Designed and developed by David Bautista Arroyo
                 </p>
             </div>
             </div>

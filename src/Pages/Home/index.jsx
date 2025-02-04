@@ -33,7 +33,7 @@ const Home = () => {
                 {/* Tarjetas de servicios */}
                 <div className='w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8 px-4'>
                     {/* Card 1 */}
-                    <div className="flex flex-col items-center h-auto p-6 rounded-lg bg-[#4A235A] shadow-lg">
+                    <div className="flex flex-col items-center h-auto p-6 rounded-lg bg-[#4A235A] shadow-lg border-2 border-white ">
                         <h2 className='text-white text-lg md:text-xl font-semibold'>Lessons</h2>
                         <p className='text-white text-center text-sm md:text-base lg:text-lg my-2'>
                             Begin your learning journey with the lessons we have thoughtfully prepared for you.
@@ -46,7 +46,7 @@ const Home = () => {
                     </div>
 
                     {/* Card 2 */}
-                    <div className="flex flex-col items-center h-auto p-6 rounded-lg bg-[#4A235A] shadow-lg">
+                    <div className="flex flex-col items-center h-auto p-6 rounded-lg bg-[#4A235A] shadow-lg border-2 border-white ">
                         <h2 className='text-white text-lg md:text-xl font-semibold'>Maria</h2>
                         <p className='text-white text-center text-sm md:text-base lg:text-lg my-2'>
                             Start a conversation with virtual assistant Maria and discover your full potential.
@@ -59,7 +59,7 @@ const Home = () => {
                     </div>
 
                     {/* Card 3 */}
-                    <div className="flex flex-col items-center h-auto p-6 rounded-lg bg-[#4A235A] shadow-lg">
+                    <div className="flex flex-col items-center h-auto p-6 rounded-lg bg-[#4A235A] shadow-lg border-2 border-white ">
                         <h2 className='text-white text-lg md:text-xl font-semibold'>Translator</h2>
                         <p className='text-white text-center text-sm md:text-base lg:text-lg my-2'>
                             Utilize our translator to accurately translate any text or content with ease.
