@@ -1,37 +1,25 @@
 import MariaImage from "../../Components/Maria";
 import Feedback from "../../Components/Feedback";
+import Listening from "../../Components/Listening";
 
 const Maria = () => {
-
     return(
-        <div className="flex justify-between w-full h-auto">
-            <div className="w-2/5 mr-2">
-                <aside className="text-center mt-18 ml-10">
+        <div className="flex flex-col md:flex-row justify-between w-full h-auto p-4 md:p-8">
+            <div className="w-full mt-18 md:w-3/5 mb-4 md:mb-0 md:mr-4 lg:ml-48">
+                <aside className="text-center">
                     <MariaImage />
                     {/* Listening Part */}
-                    <div className="flex justify-center mt-4 space-x-2">
-                    {[...Array(10)].map((_, index) => (
-                        <div
-                        key={index}
-                        className="bg-pink-200 w-1 h-6 animate-pulse"
-                        style={{
-                            animationDelay: `${index * 0.1}s`,
-                            animationDuration: "1s",
-                        }}
-                        />
-                    ))}
-                    </div>
+                    <Listening />
                     <p className="text-pink-200 text-3xl font-semibold">Listening...</p>
                 </aside>
             </div>
 
             {/* Feedback space */}
-            <Feedback />
-            
+            <div className="h-auto md:w-4/5 md:mr-12 lg:w-4/5 lg:mr-12 ">
+                <Feedback />
+            </div>
         </div>
-    )
-
+    );
 }
-
 
 export default Maria;
