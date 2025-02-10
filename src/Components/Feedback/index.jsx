@@ -1,6 +1,6 @@
 const Feedback = () => {
     return(
-        <div className="w-full h-auto bg-[#4A235A] mt-18 ml-2 rounded-xl md:w-4/5 lg:w-4/5">
+        <div className="w-full border border-white h-auto bg-[#4A235A] mt-18 ml-2 rounded-xl md:w-4/5 lg:w-4/5">
                 <div className="p-8">
                     <h3 className="text-xl font-bold mb-2">Feedback</h3>
                     <hr></hr>

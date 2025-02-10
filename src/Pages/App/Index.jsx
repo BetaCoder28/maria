@@ -4,6 +4,7 @@ import './App.css'
 import NavBar from '../../Components/NavBar'
 import Home from '../Home';
 import Maria from '../Maria';
+import Translator from '../Translate';
 import NotFound from '../NotFound';
 import PageConstruction from '../Construction';
 
@@ -13,7 +14,7 @@ const AppRoutes = () => {
     {path : '/', element : <Home />},
     {path : '/lessons', element : <PageConstruction />},
     {path : '/maria', element : <Maria />},
-    {path : '/translate', element : <PageConstruction />},
+    {path : '/translate', element : <Translator />},
     {path : '/*', element : <NotFound /> },
 
   ])

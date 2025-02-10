@@ -10,8 +10,10 @@ const Listening = () => {
                         animationDuration: "1s",
                     }}
                 />
+                
             ))}
         </div>
+        
     );
 }
 
