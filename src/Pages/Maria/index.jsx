@@ -1,9 +1,59 @@
+import { useState, useEffect } from "react";
+
 import MariaImage from "../../Components/Maria";
 import Feedback from "../../Components/Feedback";
 import Listening from "../../Components/Listening";
 import Microphone from "../../Components/Microphone";
 
+
 const Maria = () => {
+
+    const [isListening, setIsListening] = useState(false);
+    const [transcript, setTranscript] = useState('');
+    const [recognition, setRecognition] = useState(null);
+
+    useEffect(() => {
+        // configurar el api de reconocimiento de voz
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SpeechRecognition){
+            const recognition = new SpeechRecognition();
+            recognition.continuous = true
+            recognition.interimResults = true;
+            recognition.lang = 'es-Es';
+
+            recognition.onresult = (event) =>{
+                const current = event.resultIndex;
+                const transcript = Array.from(event.results)
+                .map(result => result[0])
+                .map(result => result.transcript)
+                .join('');
+            setTranscript(transcript);
+            console.log('Detected Text: ', transcript);
+            };
+            
+            recognition.onerror = (event) => {
+                console.error('Error :', event.error);
+            };
+
+            setRecognition(recognition);
+
+        } else {
+            console.warn('Voice recognice not compatible');
+        }
+    }, []
+    ); 
+
+    
+    const toggleMicrophone = () => {
+        if (isListening) {
+            recognition?.stop();
+        } else {
+            recognition?.start();
+        }
+        setIsListening(!isListening);
+    };
+
+
     return(
         <div className="flex flex-col md:flex-row justify-between w-full h-auto p-4 md:p-8">
             {/* Animación del listening */}
@@ -13,7 +63,10 @@ const Maria = () => {
                     {/* Listening Part */}
                     <Listening />
                     <p className="text-pink-200 text-xl font-semibold">Listening...</p>
-                    <Microphone />
+                    <Microphone
+                        onClick={toggleMicrophone}
+                        isListening={isListening}
+                    />
                 </aside>
             </div>
 

@@ -1,8 +1,11 @@
 
-const microphone = () => {
+const Microphone = ({onClick, isListening}) => {
 
     return(
-        <div className="flex justify-center mt-4 space-x-2">
+        <button
+        onClick = {onClick}
+        className={`flex justify-center mt-4 space-x-2 microphone-button ${isListening ? 'opacity-100' : 'opacity-70 hover:opacity-100'
+            } transition-opacity duration-200`}>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="48"
@@ -25,10 +28,10 @@ const microphone = () => {
                 />
             </svg>
 
-        </div>
+        </button>
     );
 
 }
 
 
-export default microphone;
+export default Microphone;
