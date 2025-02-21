@@ -8,9 +8,10 @@ const Translator = () => {
 
     const clearText = () => {
         setInputText('');
+        setTranslatedText('');
     };
 
-    // TODO Función para "traducir" el texto
+    // TODO -> Función para mandar al endpoint a traducir el texto
     const translateText = () => {
         setTranslatedText(inputText); 
     };
@@ -18,7 +19,7 @@ const Translator = () => {
     return (
         <section className="px-4 py-10 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-screen-xl">
-                {/* Contenedor principal con títulos centrados sobre los textareas */}
+                {/* Contenedor principal con títulos */}
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                     
                     {/* Sección de Input */}
