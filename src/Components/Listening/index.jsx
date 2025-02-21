@@ -4,7 +4,7 @@ const Listening = () => {
             {[...Array(10)].map((_, index) => (
                 <div
                     key={index}
-                    className="bg-pink-200 w-1 h-6 animate-pulse"
+                    className="bg-pink-200 w-1 h-2 animate-pulse"
                     style={{
                         animationDelay: `${index * 0.1}s`,
                         animationDuration: "1s",

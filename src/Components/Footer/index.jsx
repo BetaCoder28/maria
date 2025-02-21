@@ -132,14 +132,14 @@ const Footer = () => {
                         <span className="text-base">David Bautista Arroyo</span>
                     </li>
                     <li>
-                        <span className="text-base">Web Developer</span>
+                        <span className="text-base">+52 221-987-5281</span>
                     </li>
                     <li>
                         <a 
                         href="mailto:davidbaar07@gmail.com" 
                         className="hover:text-[#F4D03F] transition-colors"
                         >
-                        Email
+                        davidbaar07@gmail.com
                         </a>
                     </li>
                     </ul>

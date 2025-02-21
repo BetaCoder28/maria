@@ -1,6 +1,7 @@
 import MariaImage from "../../Components/Maria";
 import Feedback from "../../Components/Feedback";
 import Listening from "../../Components/Listening";
+import Microphone from "../../Components/Microphone";
 
 const Maria = () => {
     return(
@@ -11,7 +12,8 @@ const Maria = () => {
                     <MariaImage />
                     {/* Listening Part */}
                     <Listening />
-                    <p className="text-pink-200 text-3xl font-semibold">Listening...</p>
+                    <p className="text-pink-200 text-xl font-semibold">Listening...</p>
+                    <Microphone />
                 </aside>
             </div>
 
