@@ -16,39 +16,40 @@ const Maria = () => {
         // configurar el api de reconocimiento de voz
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         if (SpeechRecognition){
-            const recognition = new SpeechRecognition();
-            recognition.continuous = true
-            recognition.interimResults = true;
-            recognition.lang = 'es-Es';
+            const recog = new SpeechRecognition();
+            recog.continuous = true
+            recog.interimResults = true;
+            recog.lang = 'en-US';
 
-            recognition.onresult = (event) =>{
-                const current = event.resultIndex;
-                const transcript = Array.from(event.results)
-                .map(result => result[0])
-                .map(result => result.transcript)
+            recog.onresult = (event) =>{
+                const transcriptText = Array.from(event.results)
+                .map(result => result[0].transcript)
                 .join('');
-            setTranscript(transcript);
-            console.log('Detected Text: ', transcript);
+            setTranscript(prev => transcriptText); //actualizar el estado
+            console.log('Detected Text: ', transcriptText);
             };
             
-            recognition.onerror = (event) => {
+            recog.onerror = (event) => {
                 console.error('Error :', event.error);
             };
 
-            setRecognition(recognition);
+            setRecognition(recog);
 
         } else {
-            console.warn('Voice recognice not compatible');
+            console.warn('Speech recognition not supported in this browser.');
         }
     }, []
     ); 
 
     
     const toggleMicrophone = () => {
+        if(!recognition) return;
         if (isListening) {
             recognition?.stop();
+            console.log('stop');
         } else {
             recognition?.start();
+            console.log('active');
         }
         setIsListening(!isListening);
     };
@@ -60,13 +61,18 @@ const Maria = () => {
             <div className="w-full mt-18 md:w-3/5 mb-4 md:mb-0 md:mr-4 lg:ml-48">
                 <aside className="text-center">
                     <MariaImage />
+
                     {/* Listening Part */}
                     <Listening />
                     <p className="text-pink-200 text-xl font-semibold">Listening...</p>
-                    <Microphone
-                        onClick={toggleMicrophone}
-                        isListening={isListening}
-                    />
+
+                    {/* Microphone Part */}
+                    <div className="flex justify-center">
+                        <Microphone
+                            onClick={toggleMicrophone}
+                            isListening={isListening}
+                            />
+                    </div>
                 </aside>
             </div>
 

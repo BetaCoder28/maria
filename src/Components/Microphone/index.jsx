@@ -4,7 +4,7 @@ const Microphone = ({onClick, isListening}) => {
     return(
         <button
         onClick = {onClick}
-        className={`flex justify-center mt-4 space-x-2 microphone-button ${isListening ? 'opacity-100' : 'opacity-70 hover:opacity-100'
+        className={`flex justify-center rounded-full p-2 mt-4 space-x-2 transition-colors duration-200 ${isListening ? 'opacity-100 bg-black' : 'opacity-70 hover:opacity-100'
             } transition-opacity duration-200`}>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
