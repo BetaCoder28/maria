@@ -1,6 +1,7 @@
 import { useRoutes, BrowserRouter, useLocation } from 'react-router-dom';
 import './App.css'
 
+import { MariaProvider } from '../../Context';
 import NavBar from '../../Components/NavBar'
 import Home from '../Home';
 import Maria from '../Maria';
@@ -34,9 +35,11 @@ const AppWrapper = () => {
 
 const App = () => {
   return (
+    <MariaProvider>
       <BrowserRouter >
         <AppWrapper />
       </BrowserRouter >
+    </MariaProvider>
   )
 }
 

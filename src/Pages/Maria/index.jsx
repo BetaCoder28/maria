@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { MariaContext } from "../../Context";
 
 import MariaImage from "../../Components/Maria";
 import Feedback from "../../Components/Feedback";
@@ -7,10 +8,8 @@ import Microphone from "../../Components/Microphone";
 
 
 const Maria = () => {
-
-    const [isListening, setIsListening] = useState(false);
-    const [transcript, setTranscript] = useState('');
-    const [recognition, setRecognition] = useState(null);
+    // leer el contexto global
+    const context = useContext(MariaContext);
 
     useEffect(() => {
         // configurar el api de reconocimiento de voz
@@ -25,7 +24,7 @@ const Maria = () => {
                 const transcriptText = Array.from(event.results)
                 .map(result => result[0].transcript)
                 .join('');
-            setTranscript(prev => transcriptText); //actualizar el estado
+            context.setTranscript(prev => transcriptText); //actualizar el estado
             console.log('Detected Text: ', transcriptText);
             };
             
@@ -33,7 +32,7 @@ const Maria = () => {
                 console.error('Error :', event.error);
             };
 
-            setRecognition(recog);
+            context.setRecognition(recog);
 
         } else {
             console.warn('Speech recognition not supported in this browser.');
@@ -43,15 +42,15 @@ const Maria = () => {
 
     
     const toggleMicrophone = () => {
-        if(!recognition) return;
-        if (isListening) {
-            recognition?.stop();
+        if(!context.recognition) return;
+        if (context.isListening) {
+            context.recognition?.stop();
             console.log('stop');
         } else {
-            recognition?.start();
+            context.recognition?.start();
             console.log('active');
         }
-        setIsListening(!isListening);
+        context.setIsListening(!context.isListening);
     };
 
 
@@ -63,14 +62,18 @@ const Maria = () => {
                     <MariaImage />
 
                     {/* Listening Part */}
-                    <Listening />
-                    <p className="text-pink-200 text-xl font-semibold">Listening...</p>
+                    {context.isListening && (
+                        <>
+                            <Listening />
+                            <p className="text-pink-200 text-xl font-semibold">Listening...</p>
+                        </>
+                    )}
 
                     {/* Microphone Part */}
                     <div className="flex justify-center">
                         <Microphone
                             onClick={toggleMicrophone}
-                            isListening={isListening}
+                            isListening={context.isListening}
                             />
                     </div>
                 </aside>
