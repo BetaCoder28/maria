@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { MariaContext } from "../../Context";
 
 import MariaImage from "../../Components/Maria";
@@ -12,6 +12,7 @@ import { sendChatMessage } from "../../services/chat";
 const Maria = () => {
     // leer el contexto global
     const context = useContext(MariaContext);
+    const silenceTimeout = useRef(null);
 
     useEffect(() => {
         // configurar el api de reconocimiento de voz
@@ -25,6 +26,9 @@ const Maria = () => {
             let finalTranscript = ''; //transcripción final
 
             recog.onresult = (event) => {
+                //reiniciar el temporizador
+                clearTimeout(silenceTimeout.current);
+
                 const transcriptText = Array.from(event.results)
                 .map(result => result[0].transcript)
                 .join('');
@@ -36,22 +40,34 @@ const Maria = () => {
 
             context.setTranscript(prev => transcriptText); //actualizar el estado
             console.log('Detected Text: ', transcriptText);
+
+            silenceTimeout.current = setTimeout(() => {
+                recog.stop();
+                console.log("Silence detected, stopping recognition...");
+
+                if (finalTranscript){
+                    sendMessage(finalTranscript);
+                }
+            }, 2000);
+
             };
 
-            recog.onend = async() => {
-                if(finalTranscript){
-                    try{
-                        // mandar mensaje al api
-                        const apiResponse = await sendChatMessage(finalTranscript);
-                        
-                        console.log('Respuesta del api: ', apiResponse);
+            const sendMessage = async (message) => {
+                try{
+                    // mandar mensaje al api
+                    const apiResponse = await sendChatMessage(message);
+                    
+                    console.log('Respuesta del api: ', apiResponse);
 
-                        //Limpiar transcripción
-                        context.setTranscript('');
-                    }
-                    catch(error){
-                        console.error('Error processing response:', error )
-                    }
+                    //Limpiar transcripción
+                    context.setTranscript('');
+                    setTimeout(() => {
+                        recog.start();
+                        console.log("Microphone reactivated");
+                    }, 1000);
+                }
+                catch(error){
+                    console.error('Error processing response:', error )
                 }
             }
             context.setRecognition(recog);
