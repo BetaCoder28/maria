@@ -6,6 +6,8 @@ import Feedback from "../../Components/Feedback";
 import Listening from "../../Components/Listening";
 import Microphone from "../../Components/Microphone";
 
+import { sendChatMessage } from "../../services/chat";
+
 
 const Maria = () => {
     // leer el contexto global
@@ -20,20 +22,39 @@ const Maria = () => {
             recog.interimResults = true;
             recog.lang = 'en-US';
 
-            recog.onresult = (event) =>{
+            let finalTranscript = ''; //transcripción final
+
+            recog.onresult = (event) => {
                 const transcriptText = Array.from(event.results)
                 .map(result => result[0].transcript)
                 .join('');
+
+                //detectar si es el resultado final
+                if (event.results[0].isFinal){
+                    finalTranscript = transcriptText
+                }
+
             context.setTranscript(prev => transcriptText); //actualizar el estado
             console.log('Detected Text: ', transcriptText);
             };
-            
-            recog.onerror = (event) => {
-                console.error('Error :', event.error);
-            };
 
+            recog.onend = async() => {
+                if(finalTranscript){
+                    try{
+                        // mandar mensaje al api
+                        const apiResponse = await sendChatMessage(finalTranscript);
+                        
+                        console.log('Respuesta del api: ', apiResponse);
+
+                        //Limpiar transcripción
+                        context.setTranscript('');
+                    }
+                    catch(error){
+                        console.error('Error processing response:', error )
+                    }
+                }
+            }
             context.setRecognition(recog);
-
         } else {
             console.warn('Speech recognition not supported in this browser.');
         }
