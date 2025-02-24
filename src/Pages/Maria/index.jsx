@@ -1,9 +1,10 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { MariaContext } from "../../Context";
 
 import MariaImage from "../../Components/Maria";
 import Feedback from "../../Components/Feedback";
 import Listening from "../../Components/Listening";
+import Speaking from "../../Components/Speaking";
 import Microphone from "../../Components/Microphone";
 
 import { sendChatMessage } from "../../services/chat";
@@ -12,7 +13,10 @@ import { sendChatMessage } from "../../services/chat";
 const Maria = () => {
     // leer el contexto global
     const context = useContext(MariaContext);
+    const [audioUrl, setAudioUrl] = useState(null); // Estado para la URL del audio
+
     const silenceTimeout = useRef(null);
+    const audioRef = useRef(null);
 
     useEffect(() => {
         // configurar el api de reconocimiento de voz
@@ -56,11 +60,17 @@ const Maria = () => {
                 try{
                     // mandar mensaje al api
                     const apiResponse = await sendChatMessage(message);
-                    
+
                     console.log('Respuesta del api: ', apiResponse);
 
                     //Limpiar transcripción
                     context.setTranscript('');
+
+                    // Reproducir audio de la respuesta
+                    if (apiResponse.audio) {
+                        playAudio(apiResponse.audio);
+                    }
+
                     setTimeout(() => {
                         recog.start();
                         console.log("Microphone reactivated");
@@ -77,6 +87,50 @@ const Maria = () => {
     }, []
     ); 
 
+    // Función para convertir Base64 en un audio reproducible
+    const playAudio = (base64Audio) => {
+        const byteCharacters = atob(base64Audio);
+        const byteArrays = [];
+
+        for (let i = 0; i < byteCharacters.length; i++) {
+            byteArrays.push(byteCharacters.charCodeAt(i));
+        }
+
+        const byteArray = new Uint8Array(byteArrays);
+        const blob = new Blob([byteArray], { type: "audio/mp3" });
+        const url = URL.createObjectURL(blob);
+
+        setAudioUrl(url); // Guardar la URL en el estado
+
+        setTimeout(() => {
+            if (audioRef.current) {
+                audioRef.current.play().catch(error => console.error("Error al reproducir audio:", error));
+            }
+        }, 500); // Pequeño delay para asegurar que la URL está lista
+    };
+
+
+    // Manejo de eventos del audio
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.onplay = () => {
+                context.setIsSpeaking(true);
+                context.setIsListening(false); // Desactivar escucha
+                context.recognition?.stop(); // Detener la escucha mientras habla
+                context.setTranscript(''); // Limpiar el transcriptor
+            };
+
+            audioRef.current.onended = () => {
+                context.setIsSpeaking(false);
+                setTimeout(() => {
+                    if (!context.isListening) { // Solo iniciar si no está escuchando ya
+                        context.recognition?.start();
+                        context.setIsListening(true);
+                    }
+                }, 500); // Pequeña espera para evitar superposición
+            };
+        }
+    }, [audioUrl]);
     
     const toggleMicrophone = () => {
         if(!context.recognition) return;
@@ -99,7 +153,7 @@ const Maria = () => {
                     <MariaImage />
 
                     {/* Listening Part */}
-                    {context.isListening && (
+                    {!context.isSpeaking && context.isListening && (
                         <>
                             <Listening />
                             <p className="text-pink-200 text-xl font-semibold">Listening...</p>
@@ -113,6 +167,9 @@ const Maria = () => {
                             isListening={context.isListening}
                             />
                     </div>
+                    
+                    {/* Reproductor de Audio */}
+                    <audio ref={audioRef} src={audioUrl} />
                 </aside>
             </div>
 

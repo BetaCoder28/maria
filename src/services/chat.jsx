@@ -12,7 +12,7 @@ export const sendChatMessage = async (content) => {
         });
 
         if(!response.ok) throw new Error('Error at Server Response');
-        return await response.text();
+        return await response.json();
     }
     catch(error){
         console.error("Error sending message: ", error )

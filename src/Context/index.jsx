@@ -7,6 +7,7 @@ export const MariaContext = createContext();
 export const MariaProvider = ({children}) => {
 
     const [isListening, setIsListening] = useState(false);
+    const [isSpeaking, setIsSpeaking] = useState(false);
     const [transcript, setTranscript] = useState('');
     const [recognition, setRecognition] = useState(null);
 
@@ -21,6 +22,8 @@ export const MariaProvider = ({children}) => {
             setTranscript,
             recognition,
             setRecognition,
+            isSpeaking,
+            setIsSpeaking,
         }}>
             {children}
         </MariaContext.Provider>
