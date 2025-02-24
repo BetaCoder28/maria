@@ -66,9 +66,15 @@ const Maria = () => {
                     //Limpiar transcripción
                     context.setTranscript('');
 
-                    // Reproducir audio de la respuesta
+                    // Reproducir audio de la URL recibida
                     if (apiResponse.audio) {
-                        playAudio(apiResponse.audio);
+                        setAudioUrl(apiResponse.audio);
+                        
+                        setTimeout(() => {
+                            if (audioRef.current) {
+                                audioRef.current.play().catch(error => console.error("Error al reproducir audio:", error));
+                            }
+                        }, 500); // Pequeño delay para asegurar que la URL está lista
                     }
 
                     setTimeout(() => {
@@ -86,29 +92,6 @@ const Maria = () => {
         }
     }, []
     ); 
-
-    // Función para convertir Base64 en un audio reproducible
-    const playAudio = (base64Audio) => {
-        const byteCharacters = atob(base64Audio);
-        const byteArrays = [];
-
-        for (let i = 0; i < byteCharacters.length; i++) {
-            byteArrays.push(byteCharacters.charCodeAt(i));
-        }
-
-        const byteArray = new Uint8Array(byteArrays);
-        const blob = new Blob([byteArray], { type: "audio/mp3" });
-        const url = URL.createObjectURL(blob);
-
-        setAudioUrl(url); // Guardar la URL en el estado
-
-        setTimeout(() => {
-            if (audioRef.current) {
-                audioRef.current.play().catch(error => console.error("Error al reproducir audio:", error));
-            }
-        }, 500); // Pequeño delay para asegurar que la URL está lista
-    };
-
 
     // Manejo de eventos del audio
     useEffect(() => {
