@@ -1,10 +1,9 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef} from "react";
 import { MariaContext } from "../../Context";
 
 import MariaImage from "../../Components/Maria";
 import Feedback from "../../Components/Feedback";
 import Listening from "../../Components/Listening";
-import Speaking from "../../Components/Speaking";
 import Microphone from "../../Components/Microphone";
 
 import { sendChatMessage } from "../../services/chat";
@@ -13,9 +12,9 @@ import { sendChatMessage } from "../../services/chat";
 const Maria = () => {
     // leer el contexto global
     const context = useContext(MariaContext);
-    const [audioUrl, setAudioUrl] = useState(null); // Estado para la URL del audio
 
     const silenceTimeout = useRef(null);
+    const recogRef = useRef(null);
     const audioRef = useRef(null);
 
     useEffect(() => {
@@ -39,7 +38,7 @@ const Maria = () => {
 
                 //detectar si es el resultado final
                 if (event.results[0].isFinal){
-                    finalTranscript = transcriptText
+                    sendMessage(transcriptText)
                 }
 
             context.setTranscript(prev => transcriptText); //actualizar el estado
@@ -48,50 +47,50 @@ const Maria = () => {
             silenceTimeout.current = setTimeout(() => {
                 recog.stop();
                 console.log("Silence detected, stopping recognition...");
-
-                if (finalTranscript){
-                    sendMessage(finalTranscript);
-                }
-            }, 2000);
-
+            }, 1500);
             };
 
-            const sendMessage = async (message) => {
-                try{
-                    // mandar mensaje al api
-                    const apiResponse = await sendChatMessage(message);
-
-                    console.log('Respuesta del api: ', apiResponse);
-
-                    //Limpiar transcripción
-                    context.setTranscript('');
-
-                    // Reproducir audio de la URL recibida
-                    if (apiResponse.audio) {
-                        setAudioUrl(apiResponse.audio);
-                        
-                        setTimeout(() => {
-                            if (audioRef.current) {
-                                audioRef.current.play().catch(error => console.error("Error al reproducir audio:", error));
-                            }
-                        }, 500); // Pequeño delay para asegurar que la URL está lista
-                    }
-
-                    setTimeout(() => {
-                        recog.start();
-                        console.log("Microphone reactivated");
-                    }, 1000);
-                }
-                catch(error){
-                    console.error('Error processing response:', error )
-                }
-            }
+            recogRef.current = recog;
             context.setRecognition(recog);
+
         } else {
             console.warn('Speech recognition not supported in this browser.');
         }
-    }, []
-    ); 
+    }, []); 
+
+    const sendMessage = async (message) => {
+        try{
+            // mandar mensaje al api
+            const apiResponse = await sendChatMessage(message);
+
+            console.log('Respuesta del api: ', apiResponse);
+
+            //Limpiar transcripción
+            context.setTranscript('');
+
+            // Reproducir audio de la URL recibida
+            if (apiResponse.audio) {
+                context.setAudioUrl(apiResponse.audio);
+                
+                setTimeout(() => {
+                    if (audioRef.current) {
+                        audioRef.current.play().catch(error => console.error("Error reproducing audio:", error));
+                    }
+                }, 500); //delay para asegurar que la URL está lista
+            }
+
+            setTimeout(() => {
+                if (!context.isListening) {
+                    recogRef.current?.start();
+                    context.setIsListening(true);
+                    console.log("Microphone reactivated");
+                }
+            }, 1000);
+        }
+        catch(error){
+            console.error('Error processing response:', error )
+        }
+    }
 
     // Manejo de eventos del audio
     useEffect(() => {
@@ -110,20 +109,24 @@ const Maria = () => {
                         context.recognition?.start();
                         context.setIsListening(true);
                     }
-                }, 500); // Pequeña espera para evitar superposición
+                }, 500); //espera para evitar superposición
             };
         }
-    }, [audioUrl]);
+    }, [context.audioUrl]);
     
+    //activar/desactivar micro
     const toggleMicrophone = () => {
-        if(!context.recognition) return;
+        if (!recogRef.current) return;
+
         if (context.isListening) {
-            context.recognition?.stop();
-            console.log('stop');
+            recogRef.current.stop();
+            console.log('Microphone stopped');
         } else {
-            context.recognition?.start();
-            console.log('active');
+            clearTimeout(silenceTimeout.current); // Limpiar temporizador previo
+            recogRef.current.start();
+            console.log('Microphone activated');
         }
+
         context.setIsListening(!context.isListening);
     };
 
@@ -152,7 +155,7 @@ const Maria = () => {
                     </div>
                     
                     {/* Reproductor de Audio */}
-                    <audio ref={audioRef} src={audioUrl} />
+                    <audio ref={audioRef} src={context.audioUrl} />
                 </aside>
             </div>
 

@@ -10,6 +10,7 @@ export const MariaProvider = ({children}) => {
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [transcript, setTranscript] = useState('');
     const [recognition, setRecognition] = useState(null);
+    const [audioUrl, setAudioUrl] = useState(null);
 
     //Del contexto crear un proveedor que va a encapsular todos los componentes de app
     // para proveerlos de información
@@ -24,6 +25,8 @@ export const MariaProvider = ({children}) => {
             setRecognition,
             isSpeaking,
             setIsSpeaking,
+            audioUrl,
+            setAudioUrl
         }}>
             {children}
         </MariaContext.Provider>
