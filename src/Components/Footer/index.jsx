@@ -1,6 +1,13 @@
-import { Link } from "react-router-dom";
+import { useContext } from 'react';
+//Importaciones para multilenguaje
+import { LanguageContext } from '../../locale/languageProvider';
+import { translations } from '../../locale/translations';
+
 
 const Footer = () => {
+
+    const {language} = useContext(LanguageContext);
+    const t = translations[language];
 
     return(
         <footer className="bg-[#2E0F3A] text-gray-300">
@@ -107,17 +114,17 @@ const Footer = () => {
 
                 <div className="col-span-1">
                     <h3 className="text-sm font-semibold uppercase tracking-wider text-[#F4D03F]">
-                    Legal
+                    {t.Home.Footer.legal.title}
                     </h3>
                     <ul className="mt-4 space-y-2">
                     <li>
                         <a href="#" className="text-base hover:text-[#F4D03F] transition-colors">
-                        Privacy
+                        {t.Home.Footer.legal.privacy}
                         </a>
                     </li>
                     <li>
                         <a href="#" className="text-base hover:text-[#F4D03F] transition-colors">
-                        Terms
+                        {t.Home.Footer.legal.terms}
                         </a>
                     </li>
                     </ul>
@@ -125,7 +132,7 @@ const Footer = () => {
 
                 <div className="col-span-1">
                     <h3 className="text-sm font-semibold uppercase tracking-wider text-[#F4D03F]">
-                    Contact
+                    {t.Home.Footer.contact.title}
                     </h3>
                     <ul className="mt-4 space-y-2">
                     <li>
@@ -150,9 +157,7 @@ const Footer = () => {
             {/* Copyright */}
             <div className="mt-12 border-t border-[#4A235A] pt-8">
                 <p className="text-center text-sm text-gray-400">
-                &copy; {new Date().getFullYear()} HelloMaria & Project Maria. All rights reserved.
-                <br />
-                Designed and developed by David Bautista Arroyo
+                {t.Home.Footer.copyright}
                 </p>
             </div>
             </div>

@@ -8,7 +8,7 @@ import Maria from '../Maria';
 import Translator from '../Translate';
 import NotFound from '../NotFound';
 import PageConstruction from '../Construction';
-
+import { LanguageProvider } from '../../locale/languageProvider';
 
 const AppRoutes = () => {
   let routes = useRoutes([
@@ -35,11 +35,13 @@ const AppWrapper = () => {
 
 const App = () => {
   return (
-    <MariaProvider>
-      <BrowserRouter >
-        <AppWrapper />
-      </BrowserRouter >
-    </MariaProvider>
+    <LanguageProvider>
+      <MariaProvider>
+        <BrowserRouter >
+          <AppWrapper />
+        </BrowserRouter >
+      </MariaProvider>
+    </LanguageProvider>
   )
 }
 
