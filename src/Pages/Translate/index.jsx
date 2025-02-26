@@ -31,6 +31,11 @@ const Translator = () => {
                     {/* Sección de Input */}
                     <div className="flex flex-col">
                         <h2 className="text-xl md:text-2xl font-bold text-center mb-3">Insert Text</h2>
+                        <div className="flex p-2 justify-center space-x-64 border-1 rounded-md border-white w-full bg-[#4A235A]">
+                            <button className="hover:text-[#F4D03F]">English</button>
+                            <button className="hover:text-[#F4D03F]">Spanish</button>
+                        </div>
+                        <br></br>
                         <div className="rounded-lg border border-gray-200 shadow-xs focus-within:border-white focus-within:ring-1 focus-within:ring-white">
                             <textarea
                                 id="OrderNotes"
@@ -62,6 +67,11 @@ const Translator = () => {
                     {/* Sección de Output */}
                     <div className="flex flex-col">
                         <h2 className="text-xl md:text-2xl font-bold text-center mb-3">Translated Text</h2>
+                        <div className="flex p-2 justify-center space-x-64 border-1 rounded-md border-white w-full bg-[#4A235A]">
+                            <button className="hover:text-[#F4D03F]">English</button>
+                            <button className="hover:text-[#F4D03F]">Spanish</button>
+                        </div>
+                        <br></br>
                         <div className="overflow-hidden p-4 bg-[#4A235A] rounded-lg border border-gray-200 shadow-xs focus-within:border-white focus-within:ring-1 focus-within:ring-white">
                             <textarea
                                 id="TranslatedNotes"
