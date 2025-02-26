@@ -6,6 +6,8 @@ import { translate } from "../../services/translator";
 const Translator = () => {
 
     const context = useContext(MariaContext);
+    
+    const languagesToTranslate = `${context.sourceLang}|${context.targetLang}`;
 
     const clearText = () => {
         context.setInputText('');
@@ -16,8 +18,7 @@ const Translator = () => {
     const translateText = async e => {
 
         //TODO opciones para traducir en diferentes idiomas
-        const transText = await translate(context.inputText, `es|en`);
-
+        const transText = await translate(context.inputText, languagesToTranslate);
         context.setTranslatedText(transText.responseData.translatedText); 
 
     };
@@ -31,9 +32,10 @@ const Translator = () => {
                     {/* Sección de Input */}
                     <div className="flex flex-col">
                         <h2 className="text-xl md:text-2xl font-bold text-center mb-3">Insert Text</h2>
+                        {/**Input */}
                         <div className="flex p-2 justify-center space-x-64 border-1 rounded-md border-white w-full bg-[#4A235A]">
-                            <button className="hover:text-[#F4D03F]">English</button>
-                            <button className="hover:text-[#F4D03F]">Spanish</button>
+                            <button className={`hover:text-[#F4D03F]" ${context.sourceLang === 'en' ? 'text-[#F4D03F]' : '' }`} onClick={() => {context.setSourceLang('en')}}>English</button>
+                            <button className={`hover:text-[#F4D03F]" ${context.sourceLang === 'es' ? 'text-[#F4D03F]' : '' }`} onClick={() => {context.setSourceLang('es')}}>Spanish</button>
                         </div>
                         <br></br>
                         <div className="rounded-lg border border-gray-200 shadow-xs focus-within:border-white focus-within:ring-1 focus-within:ring-white">
@@ -67,9 +69,10 @@ const Translator = () => {
                     {/* Sección de Output */}
                     <div className="flex flex-col">
                         <h2 className="text-xl md:text-2xl font-bold text-center mb-3">Translated Text</h2>
+                        {/**OUTPUT */}
                         <div className="flex p-2 justify-center space-x-64 border-1 rounded-md border-white w-full bg-[#4A235A]">
-                            <button className="hover:text-[#F4D03F]">English</button>
-                            <button className="hover:text-[#F4D03F]">Spanish</button>
+                            <button className={`hover:text-[#F4D03F]" ${context.targetLang === 'en' ? 'text-[#F4D03F]' : '' }`} onClick={() => {context.setTargetLang('en')}}>English</button>
+                            <button className={`hover:text-[#F4D03F]" ${context.targetLang === 'es' ? 'text-[#F4D03F]' : '' }`} onClick={() => {context.setTargetLang('es')}}>Spanish</button>
                         </div>
                         <br></br>
                         <div className="overflow-hidden p-4 bg-[#4A235A] rounded-lg border border-gray-200 shadow-xs focus-within:border-white focus-within:ring-1 focus-within:ring-white">

@@ -16,7 +16,11 @@ export const MariaProvider = ({children}) => {
     const [inputText, setInputText] = useState('');
     const [translatedText, setTranslatedText] = useState('');
 
-    //Del contexto crear un proveedor que va a encapsular todos los componentes de app
+    //estados de los idiomas seleccionados
+    const [sourceLang, setSourceLang] = useState('en');
+    const [targetLang, setTargetLang] = useState('es');
+
+    // Proveedor que va a encapsular todos los componentes de app
     // para proveerlos de información
     return(
         <MariaContext.Provider value={{
@@ -34,7 +38,11 @@ export const MariaProvider = ({children}) => {
             inputText,
             setInputText,
             translatedText,
-            setTranslatedText
+            setTranslatedText,
+            sourceLang,
+            setSourceLang,
+            targetLang,
+            setTargetLang
         }}>
             {children}
         </MariaContext.Provider>
