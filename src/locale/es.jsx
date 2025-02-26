@@ -4,7 +4,7 @@ const es = {
         es : 'Español'
     },
     Home: {
-        mainDescription : "El objetivo de María es ofrecer una forma estructurada y efectiva de aprender un nuevo idioma a través de lecciones de conversación basadas en situaciones reales. Estas lecciones simulan escenarios auténticos, ayudándote a desarrollar habilidades prácticas en contextos significativos. Después de cada lección, conversaciones guiadas refuerzan los conceptos clave y el vocabulario, asegurando que no solo entiendas, sino que también ganes confianza para usar el idioma en situaciones reales. El enfoque inmersivo e interactivo de María apoya tu progreso hacia la fluidez con el tiempo.",
+        mainDescription : "El objetivo de Maria es ofrecer una forma estructurada y efectiva de aprender un nuevo idioma a través de lecciones de conversación basadas en situaciones reales. Estas lecciones simulan escenarios auténticos, ayudándote a desarrollar habilidades prácticas en contextos significativos. Después de cada lección, conversaciones guiadas refuerzan los conceptos clave y el vocabulario, asegurando que no solo entiendas, sino que también ganes confianza para usar el idioma en situaciones reales. El enfoque inmersivo e interactivo de María apoya tu progreso hacia la fluidez con el tiempo.",
         translatorDescription: "También tenemos un servicio adicional, el traductor.",
         ServicesTitle: {
             mainTitle : 'Nuestros Servicios',
@@ -14,7 +14,7 @@ const es = {
         },
         ServicesDescription: {
             lessons : 'Comienza tu viaje de aprendizaje con las lecciones que hemos preparado cuidadosamente para ti.',
-            maria : 'Inicia una conversación con la asistente virtual María y descubre tu máximo potencial.',
+            maria : 'Inicia una conversación con la asistente virtual Maria y descubre tu máximo potencial.',
             translator : 'Utiliza nuestro traductor para traducir con precisión cualquier texto o contenido de manera fácil.'
         },
         ServicesButton: {

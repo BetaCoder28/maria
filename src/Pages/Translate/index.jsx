@@ -1,19 +1,25 @@
-import {useState } from "react";
+import {useContext } from "react";
+import { MariaContext } from "../../Context";
+import { translate } from "../../services/translator";
 
 
 const Translator = () => {
 
-    const [inputText, setInputText] = useState('');
-    const [translatedText, setTranslatedText] = useState('');
+    const context = useContext(MariaContext);
 
     const clearText = () => {
-        setInputText('');
-        setTranslatedText('');
+        context.setInputText('');
+        context.setTranslatedText('');
     };
 
     // TODO -> Función para mandar al endpoint a traducir el texto
-    const translateText = () => {
-        setTranslatedText(inputText); 
+    const translateText = async e => {
+
+        //TODO opciones para traducir en diferentes idiomas
+        const transText = await translate(context.inputText, `es|en`);
+
+        context.setTranslatedText(transText.responseData.translatedText); 
+
     };
 
     return (
@@ -31,8 +37,8 @@ const Translator = () => {
                                 className="w-full min-h-[200px] md:min-h-[320px] h-auto bg-[#4A235A] p-4 resize-none border-none align-top text-white placeholder-gray-300 focus:ring-0 sm:text-sm"
                                 rows="4"
                                 placeholder="Enter any text..."
-                                value={inputText}
-                                onChange={(e) => setInputText(e.target.value)}
+                                value={context.inputText}
+                                onChange={(e) => context.setInputText(e.target.value)}
                             ></textarea>
                         </div>
                         <div className="flex flex-col sm:flex-row items-center justify-end gap-2 bg-[#4A235A] p-3">
@@ -62,7 +68,7 @@ const Translator = () => {
                                 className="w-full min-h-[200px] md:min-h-[320px] h-auto resize-none border-none align-top text-white placeholder-gray-300 focus:ring-0 sm:text-sm"
                                 rows="4"
                                 placeholder="Translation will appear here..."
-                                value={translatedText}
+                                value={context.translatedText}
                                 readOnly
                             ></textarea>
                         </div>
