@@ -20,6 +20,9 @@ export const MariaProvider = ({children}) => {
     const [sourceLang, setSourceLang] = useState('en');
     const [targetLang, setTargetLang] = useState('es');
 
+    //estados del feedback
+    const [isFeedback, setIsFeedback] = useState('Feedback should appears here when you finish the conversation');
+
     // Proveedor que va a encapsular todos los componentes de app
     // para proveerlos de información
     return(
@@ -42,7 +45,9 @@ export const MariaProvider = ({children}) => {
             sourceLang,
             setSourceLang,
             targetLang,
-            setTargetLang
+            setTargetLang,
+            isFeedback,
+            setIsFeedback,
         }}>
             {children}
         </MariaContext.Provider>

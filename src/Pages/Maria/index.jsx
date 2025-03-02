@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef} from "react";
+import { useContext, useEffect, useRef, useState} from "react";
 import { MariaContext } from "../../Context";
 
 import MariaImage from "../../Components/Maria";
@@ -7,6 +7,7 @@ import Listening from "../../Components/Listening";
 import Microphone from "../../Components/Microphone";
 
 import { sendChatMessage } from "../../services/chat";
+import {getFeedback} from "../../services/feedback";
 
 
 const Maria = () => {
@@ -16,6 +17,9 @@ const Maria = () => {
     const silenceTimeout = useRef(null);
     const recogRef = useRef(null);
     const audioRef = useRef(null);
+    //Historial de la conversación
+    const [conversationHistory, setConversationHistory] = useState([]);
+
 
     useEffect(() => {
         // configurar el api de reconocimiento de voz
@@ -26,7 +30,6 @@ const Maria = () => {
             recog.interimResults = true;
             recog.lang = 'en-US';
 
-            let finalTranscript = ''; //transcripción final
 
             recog.onresult = (event) => {
                 //reiniciar el temporizador
@@ -41,13 +44,14 @@ const Maria = () => {
                     sendMessage(transcriptText)
                 }
 
-            context.setTranscript(prev => transcriptText); //actualizar el estado
-            console.log('Detected Text: ', transcriptText);
+                context.setTranscript(prev => transcriptText); //actualizar el estado
+                console.log('Detected Text: ', transcriptText);
 
-            silenceTimeout.current = setTimeout(() => {
-                recog.stop();
-                console.log("Silence detected, stopping recognition...");
-            }, 1500);
+                silenceTimeout.current = setTimeout(() => {
+                    recog.stop();
+                    console.log("Silence detected, stopping recognition...");
+                }, 1500);
+
             };
 
             recogRef.current = recog;
@@ -58,6 +62,7 @@ const Maria = () => {
         }
     }, []); 
 
+
     const sendMessage = async (message) => {
         try{
             // mandar mensaje al api
@@ -65,9 +70,32 @@ const Maria = () => {
 
             console.log('Respuesta del api: ', apiResponse);
 
+            //almacenar mensaje y respuesta
+            setConversationHistory(prev => {
+                const updatedHistory = [
+                    ...prev,
+                    {role : 'user', content : message},
+                    {role : 'assistant', content : apiResponse.text}
+                ];
+                return updatedHistory;
+            });
+            //Terminar la conversación
+            if (message.toLowerCase().trim() === 'bye'){
+                recogRef.current?.stop();
+                context.setIsListening(false);
+                GetFeedback(conversationHistory);
+                
+            }else{
+                setTimeout(() => {
+                    if (!context.isListening) {
+                        recogRef.current?.start();
+                        context.setIsListening(true);
+                    }
+                }, 1000);
+            }
             //Limpiar transcripción
             context.setTranscript('');
-
+            
             // Reproducir audio de la URL recibida
             if (apiResponse.audio) {
                 context.setAudioUrl(apiResponse.audio);
@@ -78,7 +106,7 @@ const Maria = () => {
                     }
                 }, 500); //delay para asegurar que la URL está lista
             }
-
+            
             setTimeout(() => {
                 if (!context.isListening) {
                     recogRef.current?.start();
@@ -91,6 +119,39 @@ const Maria = () => {
             console.error('Error processing response:', error )
         }
     }
+    
+    //Función para obtener el feedback
+    const GetFeedback = async(conversationHistory) => {
+        try {
+            //convertir a str
+            const formattedConversation = conversationHistory
+            .map(entry => `${entry.role}: ${entry.content}`)
+            .join('\n');
+
+            if (!formattedConversation.trim()) {
+                console.error("No conversation history to send.");
+                return;
+            }
+            
+            const feedbackResponse = await getFeedback(formattedConversation);
+            console.log('Respuesta del api: ', feedbackResponse);
+
+            context.setIsFeedback(feedbackResponse.feedback);
+        }
+        catch(error){
+            console.error('Error processing response:', error)
+        }
+
+    }
+
+    //manejar efectos del feedback
+    useEffect(() => {
+        if (conversationHistory.some(entry => 
+            entry.content?.toLowerCase().includes('bye')
+          )) {
+            GetFeedback(conversationHistory);
+          }
+        }, [conversationHistory]);
 
     // Manejo de eventos del audio
     useEffect(() => {
@@ -105,8 +166,8 @@ const Maria = () => {
             audioRef.current.onended = () => {
                 context.setIsSpeaking(false);
                 setTimeout(() => {
-                    if (!context.isListening) { // Solo iniciar si no está escuchando ya
-                        context.recognition?.start();
+                    if (!context.isListening && recogRef.current) { // Solo iniciar si no está escuchando ya
+                        recogRef.current.start();
                         context.setIsListening(true);
                     }
                 }, 500); //espera para evitar superposición
@@ -120,11 +181,14 @@ const Maria = () => {
 
         if (context.isListening) {
             recogRef.current.stop();
+            context.setIsListening(false); 
             console.log('Microphone stopped');
         } else {
-            clearTimeout(silenceTimeout.current); // Limpiar temporizador previo
+            recogRef.current.abort()
+            setTimeout(() => {
             recogRef.current.start();
-            console.log('Microphone activated');
+            context.setIsListening(true);
+            }, 500);
         }
 
         context.setIsListening(!context.isListening);
