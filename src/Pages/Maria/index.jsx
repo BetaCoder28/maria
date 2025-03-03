@@ -8,6 +8,7 @@ import Microphone from "../../Components/Microphone";
 
 import { sendChatMessage } from "../../services/chat";
 import {getFeedback} from "../../services/feedback";
+import Modal from "./modal";
 
 
 const Maria = () => {
@@ -19,6 +20,19 @@ const Maria = () => {
     const audioRef = useRef(null);
     //Historial de la conversación
     const [conversationHistory, setConversationHistory] = useState([]);
+
+    // Estado para controlar la visibilidad del modal
+    const [isModalOpen, setIsModalOpen] = useState(true);
+
+    // Cerrar el modal
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+
+    // Abrir el modal automáticamente al cargar la página
+    useEffect(() => {
+        setIsModalOpen(true);
+    }, []);
 
 
     useEffect(() => {
@@ -197,6 +211,7 @@ const Maria = () => {
 
     return(
         <div className="flex flex-col md:flex-row justify-between w-full h-auto p-4 md:p-8">
+            <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
             {/* Animación del listening */}
             <div className="w-full mt-18 md:w-3/5 mb-4 md:mb-0 md:mr-4 lg:ml-48">
                 <aside className="text-center">

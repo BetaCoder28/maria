@@ -33,9 +33,9 @@ const Translator = () => {
                     <div className="flex flex-col">
                         <h2 className="text-xl md:text-2xl font-bold text-center mb-3">Insert Text</h2>
                         {/**Input */}
-                        <div className="flex p-2 justify-center space-x-64 border-1 rounded-md border-white w-full bg-[#4A235A]">
-                            <button className={`hover:text-[#F4D03F]" ${context.sourceLang === 'en' ? 'text-[#F4D03F]' : '' }`} onClick={() => {context.setSourceLang('en')}}>English</button>
-                            <button className={`hover:text-[#F4D03F]" ${context.sourceLang === 'es' ? 'text-[#F4D03F]' : '' }`} onClick={() => {context.setSourceLang('es')}}>Spanish</button>
+                        <div className="flex flex-col sm:flex-row p-2 justify-center space-x-0 sm:space-x-4 md:space-x-64 border-1 rounded-md border-white w-full bg-[#4A235A]">
+                            <button className={`hover:text-[#F4D03F] mb-2 sm:mb-0 ${context.sourceLang === 'en' ? 'text-[#F4D03F]' : '' }`} onClick={() => {context.setSourceLang('en')}}>English</button>
+                            <button className={`hover:text-[#F4D03F] ${context.sourceLang === 'es' ? 'text-[#F4D03F]' : '' }`} onClick={() => {context.setSourceLang('es')}}>Spanish</button>
                         </div>
                         <br></br>
                         <div className="rounded-lg border border-gray-200 shadow-xs focus-within:border-white focus-within:ring-1 focus-within:ring-white">
@@ -70,9 +70,9 @@ const Translator = () => {
                     <div className="flex flex-col">
                         <h2 className="text-xl md:text-2xl font-bold text-center mb-3">Translated Text</h2>
                         {/**OUTPUT */}
-                        <div className="flex p-2 justify-center space-x-64 border-1 rounded-md border-white w-full bg-[#4A235A]">
-                            <button className={`hover:text-[#F4D03F]" ${context.targetLang === 'en' ? 'text-[#F4D03F]' : '' }`} onClick={() => {context.setTargetLang('en')}}>English</button>
-                            <button className={`hover:text-[#F4D03F]" ${context.targetLang === 'es' ? 'text-[#F4D03F]' : '' }`} onClick={() => {context.setTargetLang('es')}}>Spanish</button>
+                        <div className="flex flex-col sm:flex-row p-2 justify-center space-x-0 sm:space-x-4 md:space-x-64 border-1 rounded-md border-white w-full bg-[#4A235A]">
+                            <button className={`hover:text-[#F4D03F] mb-2 sm:mb-0 ${context.targetLang === 'en' ? 'text-[#F4D03F]' : '' }`} onClick={() => {context.setTargetLang('en')}}>English</button>
+                            <button className={`hover:text-[#F4D03F] ${context.targetLang === 'es' ? 'text-[#F4D03F]' : '' }`} onClick={() => {context.setTargetLang('es')}}>Spanish</button>
                         </div>
                         <br></br>
                         <div className="overflow-hidden p-4 bg-[#4A235A] rounded-lg border border-gray-200 shadow-xs focus-within:border-white focus-within:ring-1 focus-within:ring-white">
