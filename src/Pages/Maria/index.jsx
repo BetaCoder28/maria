@@ -98,14 +98,6 @@ const Maria = () => {
                 recogRef.current?.stop();
                 context.setIsListening(false);
                 GetFeedback(conversationHistory);
-                
-            }else{
-                setTimeout(() => {
-                    if (!context.isListening) {
-                        recogRef.current?.start();
-                        context.setIsListening(true);
-                    }
-                }, 1000);
             }
             //Limpiar transcripción
             context.setTranscript('');
