@@ -13,7 +13,7 @@ const en = {
             translatorTitle : 'Translator',
         },
         ServicesDescription: {
-            lessons : 'Begin your learning journey with the lessons we have thoughtfully prepared for you.',
+            lessons : 'Begin your learning journey with the lessons we have thoughtfully prepared.',
             maria : 'Start a conversation with virtual assistant Maria and discover your full potential.',
             translator : 'Utilize our translator to accurately translate any text or content with ease.'
         },
@@ -36,6 +36,19 @@ const en = {
         } 
     
     },
+    Login : {
+        mainTitle: 'Welcome Back',
+        email : 'Email',
+        password : 'Password',
+        signButton : 'Sign In',
+        forgot: 'Forgot Password?',
+        dontAccount : "Don't have an account?",
+        signUp : 'SignUp',
+        placeholders : {
+            emailPlaceholder : 'Enter your email',
+            passwordPlaceholder : 'Enter your password',
+        }
+    }
     
 
 

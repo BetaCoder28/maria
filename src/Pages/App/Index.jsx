@@ -8,6 +8,7 @@ import Maria from '../Maria';
 import Translator from '../Translate';
 import NotFound from '../NotFound';
 import PageConstruction from '../Construction';
+import Login from '../Login';
 import { LanguageProvider } from '../../locale/languageProvider';
 
 const AppRoutes = () => {
@@ -16,6 +17,7 @@ const AppRoutes = () => {
     {path : '/lessons', element : <PageConstruction />},
     {path : '/maria', element : <Maria />},
     {path : '/translate', element : <Translator />},
+    {path : '/login', element : <Login />},
     {path : '/*', element : <NotFound /> },
 
   ])
@@ -27,7 +29,7 @@ const AppWrapper = () => {
   const location = useLocation();
   
   return <>
-    { location.pathname !== '/' &&  <NavBar />}
+    { location.pathname !== '/' && location.pathname !== '/login' && <NavBar />}
     <AppRoutes />
   </>
 

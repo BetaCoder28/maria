@@ -4,7 +4,7 @@ const es = {
         es : 'Español'
     },
     Home: {
-        mainDescription : "El objetivo de Maria es ofrecer una forma estructurada y efectiva de aprender un nuevo idioma a través de lecciones de conversación basadas en situaciones reales. Estas lecciones simulan escenarios auténticos, ayudándote a desarrollar habilidades prácticas en contextos significativos. Después de cada lección, conversaciones guiadas refuerzan los conceptos clave y el vocabulario, asegurando que no solo entiendas, sino que también ganes confianza para usar el idioma en situaciones reales. El enfoque inmersivo e interactivo de María apoya tu progreso hacia la fluidez con el tiempo.",
+        mainDescription : "El objetivo de Maria es ofrecer una forma estructurada y efectiva de aprender un nuevo idioma a través de lecciones de conversación basadas en situaciones reales. Estas lecciones simulan escenarios auténticos, ayudándote a desarrollar habilidades prácticas en contextos significativos. Después de cada lección, conversaciones guiadas refuerzan los conceptos clave y el vocabulario, asegurando que no solo entiendas, sino que también ganes confianza para usar el idioma en situaciones reales. El enfoque inmersivo e interactivo de Maria apoya tu progreso hacia la fluidez con el tiempo.",
         translatorDescription: "También tenemos un servicio adicional, el traductor.",
         ServicesTitle: {
             mainTitle : 'Nuestros Servicios',
@@ -35,6 +35,19 @@ const es = {
             copyright : `© ${new Date().getFullYear()}  HelloMaria & Project Maria. Todos los derechos reservados. Diseñado y desarrollado por Semi-Junior`
         }
     },
+    Login : {
+        mainTitle: 'Bienvenido',
+        email : 'Email',
+        password : 'Contraseña',
+        signButton : 'Entrar',
+        forgot: '¿Olvidaste tu contraseña?',
+        dontAccount : "¿No tienes una cuenta?",
+        signUp : 'Registrarme',
+        placeholders : {
+            emailPlaceholder : 'Ingresa tu correo',
+            passwordPlaceholder : 'Ingresa tu contraseña',
+        }
+    }
     
 }
 

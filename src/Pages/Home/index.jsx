@@ -52,7 +52,7 @@ const Home = () => {
                         <p className='text-white text-center text-sm md:text-base lg:text-lg my-2'>
                             {t.Home.ServicesDescription.lessons}
                         </p>
-                        <Link to='/lessons' className="w-full">
+                        <Link to='/login' className="w-full">
                             <button className="w-full px-4 py-2 bg-[#F4D03F] text-white font-bold rounded transition hover:bg-yellow-600 text-sm md:text-base">
                                 {t.Home.ServicesButton.lessons}
                             </button>
@@ -65,7 +65,7 @@ const Home = () => {
                         <p className='text-white text-center text-sm md:text-base lg:text-lg my-2'>
                             {t.Home.ServicesDescription.maria}
                         </p>
-                        <Link to='/maria' className="w-full">
+                        <Link to='/login' className="w-full">
                             <button className="w-full px-4 py-2 bg-[#F4D03F] text-white font-bold rounded transition hover:bg-yellow-600 text-sm md:text-base">
                                 {t.Home.ServicesButton.maria}
                             </button>
