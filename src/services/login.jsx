@@ -1,16 +1,13 @@
-export const sendChatMessage = async (content) => {
-    const conversation_uid = crypto.randomUUID();
-
+export const LoginService = async (email, password ) => {
     try{
-        const response = await fetch('http://127.0.0.1:8000/api/chat/',{
+        const response = await fetch('http://127.0.0.1:8000/api/login/',{
             method : 'POST',
             headers: {
                 'Content-Type' : 'application/json',
             },
             body : JSON.stringify({
-                role : 'user',
-                content : content,
-                conversation_id : conversation_uid
+                email : email,
+                password : password
             })
         });
 

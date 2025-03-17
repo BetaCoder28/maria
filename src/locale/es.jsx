@@ -46,7 +46,8 @@ const es = {
         placeholders : {
             emailPlaceholder : 'Ingresa tu correo',
             passwordPlaceholder : 'Ingresa tu contraseña',
-        }
+        },
+        errorMessage : "Error de autenticación"
     }
     
 }

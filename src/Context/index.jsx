@@ -23,6 +23,11 @@ export const MariaProvider = ({children}) => {
     //estados del feedback
     const [isFeedback, setIsFeedback] = useState('Feedback should appears here when you finish the conversation');
 
+    // estados del servicio de login(Autentication)
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+
     // Proveedor que va a encapsular todos los componentes de app
     // para proveerlos de información
     return(
@@ -48,6 +53,12 @@ export const MariaProvider = ({children}) => {
             setTargetLang,
             isFeedback,
             setIsFeedback,
+            email, 
+            setEmail,
+            password, 
+            setPassword,
+            error, 
+            setError
         }}>
             {children}
         </MariaContext.Provider>

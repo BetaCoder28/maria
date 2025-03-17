@@ -47,7 +47,8 @@ const en = {
         placeholders : {
             emailPlaceholder : 'Enter your email',
             passwordPlaceholder : 'Enter your password',
-        }
+        },
+        errorMessage : 'Authentication failed'
     }
     
 

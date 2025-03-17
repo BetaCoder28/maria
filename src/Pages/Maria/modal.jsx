@@ -11,7 +11,7 @@ const Modal = ({ isOpen, onClose }) => {
                     <p className="mt-2">Press the microphone button and start speaking.</p>
                     <hr className="my-4" />
                     <h5 className="text-lg font-bold">Finish the conversation</h5>
-                    <p className="mt-2">Say “BYE-BYE” to end.</p>
+                    <p className="mt-2">Say “BYE” to end.</p>
                 </div>
                 <div className="mt-4 flex justify-end">
                     <button onClick={onClose} className="px-4 font-bold py-2 bg-[#F4D03F] text-white rounded hover:bg-yellow-600">
