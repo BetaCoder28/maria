@@ -6,6 +6,7 @@ import { translations } from '../../locale/translations';
 import LanguageSwitcher from '../../locale/languageSwitcher';
 
 import Footer from '../../Components/Footer';
+import ProtectedButton from '../../Components/ProtectedButton';
 import './home.css';
 
 
@@ -52,11 +53,9 @@ const Home = () => {
                         <p className='text-white text-center text-sm md:text-base lg:text-lg my-2'>
                             {t.Home.ServicesDescription.lessons}
                         </p>
-                        <Link to='/login' className="w-full">
-                            <button className="w-full px-4 py-2 bg-[#F4D03F] text-white font-bold rounded transition hover:bg-yellow-600 text-sm md:text-base">
-                                {t.Home.ServicesButton.lessons}
-                            </button>
-                        </Link>
+                        <ProtectedButton to="/lessons">
+                            {t.Home.ServicesButton.lessons}
+                        </ProtectedButton>
                     </div>
 
                     {/* Card 2 */}
@@ -65,11 +64,9 @@ const Home = () => {
                         <p className='text-white text-center text-sm md:text-base lg:text-lg my-2'>
                             {t.Home.ServicesDescription.maria}
                         </p>
-                        <Link to='/login' className="w-full">
-                            <button className="w-full px-4 py-2 bg-[#F4D03F] text-white font-bold rounded transition hover:bg-yellow-600 text-sm md:text-base">
-                                {t.Home.ServicesButton.maria}
-                            </button>
-                        </Link>
+                        <ProtectedButton to="/maria">
+                            {t.Home.ServicesButton.maria}
+                        </ProtectedButton>
                     </div>
 
                     {/* Card 3 */}

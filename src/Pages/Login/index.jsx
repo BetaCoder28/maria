@@ -1,31 +1,28 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router";
-
-import {LanguageContext} from '../../locale/languageProvider';
+import { LanguageContext } from '../../locale/languageProvider';
 import { translations } from '../../locale/translations';
 import { LoginService } from "../../services/login";
 import { MariaContext } from "../../Context";
 
-
 const Login = () => {
 
-    const context = useContext(MariaContext)
+    const context = useContext(MariaContext);
     const navigate = useNavigate();
-
-    const {language} = useContext(LanguageContext);
+    
+    const { language } = useContext(LanguageContext);
     const t = translations[language];
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await LoginService(context.email, context.password);
-            
+
             // Guardar tokens en localStorage
             localStorage.setItem("access_token", response.access);
             localStorage.setItem("refresh_token", response.refresh);
 
-            console.log('si -> ', response.access)
+            console.log('Token generado ->', response.access);
             
             // Redirigir al usuario
             navigate('/maria');
@@ -51,7 +48,7 @@ const Login = () => {
                         <label className="block text-white font-medium mb-2">{t.Login.email}</label>
                         <input 
                             type="email"
-                            value = {context.email}
+                            value={context.email}
                             onChange={(e) => context.setEmail(e.target.value)}
                             className="w-full px-4 py-2 bg-[#6C3483] border border-[#F4D03F] rounded-lg 
                                    focus:outline-none focus:ring-2 focus:ring-[#F4D03F] text-white"
@@ -64,7 +61,7 @@ const Login = () => {
                         <label className="block text-white font-medium mb-2">{t.Login.password}</label>
                         <input 
                             type="password"
-                            value = {context.password}
+                            value={context.password}
                             onChange={(e) => context.setPassword(e.target.value)}
                             className="w-full px-4 py-2 bg-[#6C3483] border border-[#F4D03F] rounded-lg 
                                    focus:outline-none focus:ring-2 focus:ring-[#F4D03F] text-white"
@@ -77,7 +74,7 @@ const Login = () => {
                         type="submit"
                         className="w-full py-2 bg-[#F4D03F] hover:bg-[#F1C40F] text-white font-bold 
                         rounded-lg transition duration-300"
-                        >
+                    >
                         {t.Login.signButton}
                     </button>
 

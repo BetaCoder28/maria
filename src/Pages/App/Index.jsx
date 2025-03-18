@@ -1,6 +1,7 @@
 import { useRoutes, BrowserRouter, useLocation } from 'react-router-dom';
 import './App.css'
 
+import ProtectedRoute from '../../Components/ProtectedRoute';
 import { MariaProvider } from '../../Context';
 import NavBar from '../../Components/NavBar'
 import Home from '../Home';
@@ -15,7 +16,7 @@ const AppRoutes = () => {
   let routes = useRoutes([
     {path : '/', element : <Home />},
     {path : '/lessons', element : <PageConstruction />},
-    {path : '/maria', element : <Maria />},
+    {path : '/maria', element : <ProtectedRoute><Maria /></ProtectedRoute> },
     {path : '/translate', element : <Translator />},
     {path : '/login', element : <Login />},
     {path : '/*', element : <NotFound /> },
