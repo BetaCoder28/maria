@@ -17,10 +17,10 @@ export const isTokenExpired = (token) => {
     return decoded.exp < now;
 };
 
-export const refreshToken = async () => {
+export const refreshToken = async (logout) => { // Ahora recibe logout como argumento
     const refresh = localStorage.getItem("refresh_token");
     if (!refresh) {
-        logoutUser();
+        logout();
         return null;
     }
 
@@ -38,9 +38,10 @@ export const refreshToken = async () => {
         return data.access;
     } catch (error) {
         console.error("Error refreshing token:", error);
-        logoutUser();
+        logout();
     }
 };
+
 
 export const fetchWithAuth = async (url, options = {}) => {
     let accessToken = localStorage.getItem("access_token");
@@ -59,8 +60,3 @@ export const fetchWithAuth = async (url, options = {}) => {
     });
 };
 
-export const logoutUser = () => {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
-    window.location.href = "/login"; // Redirigir a login
-};
