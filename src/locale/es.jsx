@@ -3,6 +3,9 @@ const es = {
         en : 'Inglés',
         es : 'Español'
     },
+    General : {
+        back : 'Volver'
+    },
     Home: {
         mainDescription : "El objetivo de Maria es ofrecer una forma estructurada y efectiva de aprender un nuevo idioma a través de lecciones de conversación basadas en situaciones reales. Estas lecciones simulan escenarios auténticos, ayudándote a desarrollar habilidades prácticas en contextos significativos. Después de cada lección, conversaciones guiadas refuerzan los conceptos clave y el vocabulario, asegurando que no solo entiendas, sino que también ganes confianza para usar el idioma en situaciones reales. El enfoque inmersivo e interactivo de Maria apoya tu progreso hacia la fluidez con el tiempo.",
         translatorDescription: "También tenemos un servicio adicional, el traductor.",
@@ -48,7 +51,29 @@ const es = {
             passwordPlaceholder : 'Ingresa tu contraseña',
         },
         errorMessage : "Error de autenticación"
-    }
+    },
+    Register: {
+        mainTitle: 'Crear una Cuenta',
+        name: 'Nombre',
+        lastname : 'Apellido',
+        email: 'Email',
+        password: 'Contraseña',
+        age : 'Edad',
+        confirmPassword: 'Confirmar Contraseña',
+        signUpButton: 'Registrarse',
+        existingAccount: 'Ya tienes una cuenta?',
+        signIn: 'Iniciar Sesión',
+        placeholders: {
+            namePlaceholder: 'Nombre',
+            lastnamePlaceholder : 'Ingresa apellido',
+            emailPlaceholder: 'Ingresa email',
+            passwordPlaceholder: 'Ingresa contraseña',
+            agePlacehoder : 'Enter your age',
+            confirmPasswordPlaceholder: 'Confirmar contraseña'
+        },
+        errorMessage: 'Error en el registro',
+        passwordMismatch: 'Contraseñas no coinciden'
+    },
     
 }
 

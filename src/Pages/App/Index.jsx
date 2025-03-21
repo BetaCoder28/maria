@@ -11,6 +11,7 @@ import Translator from '../Translate';
 import NotFound from '../NotFound';
 import PageConstruction from '../Construction';
 import Login from '../Login';
+import Register from '../Register';
 import { LanguageProvider } from '../../locale/languageProvider';
 
 const AppRoutes = () => {
@@ -20,6 +21,7 @@ const AppRoutes = () => {
     {path : '/maria', element : <ProtectedRoute><Maria /></ProtectedRoute> },
     {path : '/translate', element : <Translator />},
     {path : '/login', element : <PublicRoute><Login /></PublicRoute>},
+    {path : '/register', element : <Register />},
     {path : '/*', element : <NotFound /> },
 
   ])
@@ -31,7 +33,7 @@ const AppWrapper = () => {
   const location = useLocation();
   
   return <>
-    { location.pathname !== '/' && location.pathname !== '/login' && <NavBar />}
+    { location.pathname !== '/' && location.pathname !== '/login' && location.pathname !== '/register' && <NavBar />}
     <AppRoutes />
   </>
 

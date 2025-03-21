@@ -28,6 +28,12 @@ export const MariaProvider = ({children}) => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
+    //estados del registro
+    const [name, setName] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [age, setAge] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
     // Proveedor que va a encapsular todos los componentes de app
     // para proveerlos de información
     return(
@@ -58,7 +64,16 @@ export const MariaProvider = ({children}) => {
             password, 
             setPassword,
             error, 
-            setError
+            setError,
+            name,
+            setName,
+            lastname,
+            setLastname,
+            age,
+            setAge,
+            confirmPassword,
+            setConfirmPassword
+            
         }}>
             {children}
         </MariaContext.Provider>

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 import { LanguageContext } from '../../locale/languageProvider';
 import { translations } from '../../locale/translations';
 import { LoginService } from "../../services/login";
@@ -78,18 +78,23 @@ const Login = () => {
                         {t.Login.signButton}
                     </button>
 
-                    <div className="text-center mt-4">
-                        <a href="#" className="text-[#F4D03F] hover:text-[#F1C40F] text-sm">
+                    {/* <div className="text-center mt-4">
+                        <a href="#" className="text-[#F4D03F] hover:text-yellow-700 text-sm">
                             {t.Login.forgot}
                         </a>
-                    </div>
+                    </div> */}
                 </form>
 
                 <div className="mt-6 text-center text-white">
                     <p>{t.Login.dontAccount} {' '}
-                        <a href="#" className="text-[#F4D03F] hover:text-[#F1C40F] font-medium">
-                            {t.Login.signUp}
-                        </a>
+                    <Link to="/register" className="text-[#F4D03F] hover:text-yellow-600 font-medium">
+                        {t.Login.signUp}
+                    </Link>
+                    </p>
+                    <p>
+                    <Link to="/" className="text-[#F4D03F] hover:text-yellow-600 font-medium">
+                        {t.General.back} {' '}
+                    </Link>
                     </p>
                 </div>
             </div>
