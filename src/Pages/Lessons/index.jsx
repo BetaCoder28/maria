@@ -27,7 +27,7 @@ const Lessons = () => {
                     className="flex transition-transform duration-500"
                     style={{ transform: `translateX(-${currentIndex * 100}%)` }}
                     >
-                    {/* Rectángulo 1 VOCABULARIO */}
+                    {/*VOCABULARIO */}
                     <div className="w-full flex-shrink-0 flex justify-center">
                         <div className="w-72 h-96 border border-white md:w-[650px] md:h-[680px] bg-[#4A235A] rounded-lg flex flex-col items-center pt-4 transition-opacity duration-500">
 
@@ -46,7 +46,7 @@ const Lessons = () => {
                         </div>
                     </div>
 
-                    {/* Rectángulo 2 EJEMPLOS */}
+                    {/* EJEMPLOS */}
                     <div className="w-full flex-shrink-0 flex justify-center">
                         <div className="w-72 h-96 border border-white md:w-[650px] md:h-[680px] bg-[#4A235A] rounded-lg flex flex-col items-center pt-4 transition-opacity duration-500">
 
