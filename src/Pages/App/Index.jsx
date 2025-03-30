@@ -9,7 +9,7 @@ import Home from '../Home';
 import Maria from '../Maria';
 import Translator from '../Translate';
 import NotFound from '../NotFound';
-import PageConstruction from '../Construction';
+// import PageConstruction from '../Construction';
 import Lessons from '../Lessons';
 import Login from '../Login';
 import Register from '../Register';
@@ -18,7 +18,7 @@ import { LanguageProvider } from '../../locale/languageProvider';
 const AppRoutes = () => {
   let routes = useRoutes([
     {path : '/', element : <Home />},
-    {path : '/lessons', element : <Lessons />},
+    {path : '/lessons', element : <ProtectedRoute><Lessons /></ProtectedRoute> },
     {path : '/maria', element : <ProtectedRoute><Maria /></ProtectedRoute> },
     {path : '/translate', element : <Translator />},
     {path : '/login', element : <PublicRoute><Login /></PublicRoute>},

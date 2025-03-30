@@ -14,7 +14,7 @@ export const sendChatMessage = async (content) => {
             body : JSON.stringify({
                 role : 'user',
                 content : content,
-                conversation_id : conversation_uid
+                conversation_id : 'uuid2802'
             })
         });
 

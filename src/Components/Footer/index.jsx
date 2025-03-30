@@ -54,7 +54,7 @@ const Footer = () => {
                 {/* Redes sociales */}
                 <div className="mt-6 flex justify-center space-x-6 lg:justify-start">
                     <a 
-                    href="https://github.com/SemiJunior-David-Bautista-Arroyo" 
+                    href="https://github.com/BetaCoder28" 
                     className="text-gray-400 hover:text-[#F4D03F]"
                     >
                     <span className="sr-only">GitHub</span>

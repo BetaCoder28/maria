@@ -35,7 +35,7 @@ const es = {
                 title : 'Contacto',
                 owner : 'David Bautista Arroyo'
             },
-            copyright : `© ${new Date().getFullYear()}  HelloMaria & Project Maria. Todos los derechos reservados. Diseñado y desarrollado por Semi-Junior`
+            copyright : `© ${new Date().getFullYear()}  HelloMaria & Project Maria. Todos los derechos reservados. Diseñado y desarrollado por BetaCoder28`
         }
     },
     Login : {

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useNavigate, Link } from "react-router";
+import { useNavigate, Link, useLocation } from "react-router";
 import { LanguageContext } from '../../locale/languageProvider';
 import { translations } from '../../locale/translations';
 import { LoginService } from "../../services/login";
@@ -9,6 +9,7 @@ const Login = () => {
 
     const context = useContext(MariaContext);
     const navigate = useNavigate();
+    const location = useLocation();
     
     const { language } = useContext(LanguageContext);
     const t = translations[language];
@@ -18,14 +19,12 @@ const Login = () => {
         try {
             const response = await LoginService(context.email, context.password);
 
-            // Guardar tokens en localStorage
             localStorage.setItem("access_token", response.access);
             localStorage.setItem("refresh_token", response.refresh);
 
-            console.log('Token generado ->', response.access);
-            
-            // Redirigir al usuario
-            navigate('/maria');
+            // Redirige a la ruta solicitada o a maria por defecto
+            const redirectPath = location.state?.from?.pathname || '/maria';
+            navigate(redirectPath, { replace: true });
         } catch (err) {
             context.setError(t.Login.errorMessage);
         }
