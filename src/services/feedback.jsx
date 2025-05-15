@@ -1,7 +1,7 @@
 export const getFeedback = async(content) => {
     try{
 
-        const token = localStorage.getItem('access_item')
+        const token = localStorage.getItem('access_token')
 
         const response = await fetch('http://127.0.0.1:8000/api/feedback/',{ 
             method : 'POST',

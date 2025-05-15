@@ -136,10 +136,10 @@ const Footer = () => {
                     </h3>
                     <ul className="mt-4 space-y-2">
                     <li>
-                        <span className="text-base">David Bautista Arroyo</span>
+                        <span className="text-base">David Bautista</span>
                     </li>
                     <li>
-                        <span className="text-base">+52 221-987-5281</span>
+                        <span className="text-base">+52 734-126-7957</span>
                     </li>
                     <li>
                         <a 
